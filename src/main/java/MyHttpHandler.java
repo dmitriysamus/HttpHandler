@@ -17,18 +17,35 @@ public class MyHttpHandler implements HttpHandler {
         System.out.println(httpExchange.getRequestHeaders().entrySet());
 
         OutputStream outputStream = httpExchange.getResponseBody();
+        String requestMethod = httpExchange.getRequestMethod();
+        String requestURI = httpExchange.getRequestURI().toString();
+        int rCode;
+
         StringBuilder htmlBuilder = new StringBuilder();
-        htmlBuilder.append("<html>")
-                .append("<body>")
-                .append("<h1>")
-                .append("Method: " + httpExchange.getRequestMethod())
-                .append(" on uri: " + httpExchange.getRequestURI())
-                .append("</h1>")
-                .append("</body>")
-                .append("</html>");
+        if (requestMethod.equals("GET")) {
+            htmlBuilder.append("<html>")
+                    .append("<body>")
+                    .append("<h1>")
+                    .append("Hello!")
+                    .append("It's my page")
+                    .append("</h1>")
+                    .append("</body>")
+                    .append("</html>");
+            rCode = 200;
+        } else {
+            htmlBuilder.append("<html>")
+                    .append("<body>")
+                    .append("<h1>")
+                    .append("Error 404, page not found.")
+                    .append("</h1>")
+                    .append("</body>")
+                    .append("</html>");
+            rCode = 404;
+        }
+
 
         String htmlResponse = htmlBuilder.toString();
-        httpExchange.sendResponseHeaders(200, htmlResponse.length());
+        httpExchange.sendResponseHeaders(rCode, htmlResponse.length());
         outputStream.write(htmlResponse.getBytes());
         outputStream.flush();
         outputStream.close();
