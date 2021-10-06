@@ -22,7 +22,7 @@ public class MyHttpHandler implements HttpHandler {
         int rCode;
 
         StringBuilder htmlBuilder = new StringBuilder();
-        if (requestMethod.equals("GET")) {
+        if (requestMethod.equals("GET") && requestURI.equals("/about")) {
             htmlBuilder.append("<html>")
                     .append("<body>")
                     .append("<h1>")
