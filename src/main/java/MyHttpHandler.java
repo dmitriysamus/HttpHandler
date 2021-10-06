@@ -26,8 +26,10 @@ public class MyHttpHandler implements HttpHandler {
             htmlBuilder.append("<html>")
                     .append("<body>")
                     .append("<h1>")
-                    .append("Hello!")
-                    .append("It's my page")
+                    .append("User information:")
+                    .append("name: Dmitriy")
+                    .append("age: 27")
+                    .append("company: Sberbank")
                     .append("</h1>")
                     .append("</body>")
                     .append("</html>");
